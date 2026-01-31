@@ -1,0 +1,46 @@
+{
+  "type": "record",
+  "name": "UserEvent",
+  "namespace": "com.elzakaria.kafkaproducer.avro",
+  "doc": "Represents a user event for Kafka messaging",
+  "fields": [
+    {
+      "name": "userId",
+      "type": "string",
+      "doc": "Unique user identifier"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "doc": "User email address"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "doc": "User full name"
+    },
+    {
+      "name": "eventType",
+      "type": {
+        "type": "enum",
+        "name": "UserEventType",
+        "symbols": ["CREATED", "UPDATED", "DELETED", "LOGIN", "LOGOUT"]
+      },
+      "doc": "Type of user event"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Event timestamp"
+    },
+    {
+      "name": "attributes",
+      "type": ["null", {"type": "map", "values": "string"}],
+      "default": null,
+      "doc": "Optional user attributes"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "type": "record",
+  "name": "OrderEvent",
+  "namespace": "com.elzakaria.kafkaproducer.avro",
+  "doc": "Represents an order event for Kafka messaging",
+  "fields": [
+    {
+      "name": "orderId",
+      "type": "string",
+      "doc": "Unique identifier for the order"
+    },
+    {
+      "name": "customerId",
+      "type": "string",
+      "doc": "Customer who placed the order"
+    },
+    {
+      "name": "product",
+      "type": "string",
+      "doc": "Product name"
+    },
+    {
+      "name": "quantity",
+      "type": "int",
+      "doc": "Number of items ordered"
+    },
+    {
+      "name": "price",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 10,
+        "scale": 2
+      },
+      "doc": "Price per unit"
+    },
+    {
+      "name": "status",
+      "type": {
+        "type": "enum",
+        "name": "OrderStatus",
+        "symbols": ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED"]
+      },
+      "doc": "Current order status"
+    },
+    {
+      "name": "createdAt",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Order creation timestamp"
+    },
+    {
+      "name": "metadata",
+      "type": ["null", {"type": "map", "values": "string"}],
+      "default": null,
+      "doc": "Optional metadata"
+    }
+  ]
+}
