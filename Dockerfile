@@ -3,10 +3,19 @@
 # Multi-stage Docker build
 # ============================================
 
-# Stage 1: Build
-FROM maven:3.9-eclipse-temurin-21 AS builder
+# Java version - update if needed based on available images
+ARG JAVA_VERSION=25
+
+# Stage 1: Build with Maven and JDK
+FROM eclipse-temurin:${JAVA_VERSION}-jdk AS builder
 
 WORKDIR /app
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y maven && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy pom.xml first for dependency caching
 COPY pom.xml .
@@ -16,8 +25,8 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests -B
 
-# Stage 2: Runtime
-FROM eclipse-temurin:21-jre-alpine
+# Stage 2: Runtime with JRE
+FROM eclipse-temurin:${JAVA_VERSION}-jre
 
 LABEL maintainer="Kafka Learning Agent"
 LABEL description="Learn Kafka Producer patterns through interactive lessons"
@@ -26,8 +35,8 @@ LABEL version="1.0"
 WORKDIR /app
 
 # Create non-root user for security
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -u 1001 -S appuser -G appgroup
+RUN groupadd -g 1001 appgroup && \
+    useradd -u 1001 -g appgroup -s /bin/bash appuser
 
 # Copy the built JAR
 COPY --from=builder /app/target/*.jar app.jar
@@ -39,9 +48,6 @@ USER appuser
 
 # JVM tuning for containers
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Djava.security.egd=file:/dev/./urandom"
-
-# Expose no ports - this is a CLI app that connects to Kafka
-EXPOSE 8090
 
 # Health check (optional, for orchestration)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
