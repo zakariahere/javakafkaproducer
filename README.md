@@ -45,7 +45,7 @@ The fastest way to start learning - just Docker, no Java installation needed:
 
 ```bash
 # Download the standalone compose file
-curl -O https://raw.githubusercontent.com/elzakaria/kafka-producer-learning-agent/main/docker-compose.standalone.yaml
+curl -O https://raw.githubusercontent.com/zakariahere/javakafkaproducer/refs/heads/master/docker-compose.standalone.yaml
 
 # Start everything (Kafka + Schema Registry + Kafka UI + Learning Agent)
 docker compose -f docker-compose.standalone.yaml up
@@ -70,7 +70,7 @@ For contributors or those who want to modify the code:
 
 ```bash
 # Clone the repo
-git clone https://github.com/elzakaria/kafka-producer-learning-agent.git
+git clone https://github.com/zakariahere/javakafkaproducer.git
 cd kafka-producer-learning-agent
 
 # Run (Spring Boot auto-starts Kafka + Schema Registry + Kafka UI via Docker Compose)
