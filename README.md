@@ -28,17 +28,49 @@ Learning Kafka can be overwhelming. Documentation is vast, configurations are ma
 
 ## Prerequisites
 
-- **Java 25** (or 21+)
+**Option A: Docker Only (easiest)**
+- **Docker Desktop** running
+- That's it!
+
+**Option B: Local Development**
+- **Java 21+** (25 recommended)
 - **Docker Desktop** running
 - **Maven** (wrapper included)
 
-That's it. No manual Kafka installation needed!
+---
 
-## Quick Start
+## Quick Start (Docker Only - No Java Required!)
+
+The fastest way to start learning - just Docker, no Java installation needed:
+
+```bash
+# Download the standalone compose file
+curl -O https://raw.githubusercontent.com/elzakaria/kafka-producer-learning-agent/main/docker-compose.standalone.yaml
+
+# Start everything (Kafka + Schema Registry + Kafka UI + Learning Agent)
+docker compose -f docker-compose.standalone.yaml up
+
+# Or run in detached mode and attach to the learning agent
+docker compose -f docker-compose.standalone.yaml up -d
+docker attach kafka-learning-agent
+```
+
+The interactive lesson menu will appear in your terminal. Open http://localhost:8080 to see your messages in Kafka UI!
+
+**To stop:**
+```bash
+docker compose -f docker-compose.standalone.yaml down
+```
+
+---
+
+## Quick Start (Local Development)
+
+For contributors or those who want to modify the code:
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/kafka-producer-learning-agent.git
+git clone https://github.com/elzakaria/kafka-producer-learning-agent.git
 cd kafka-producer-learning-agent
 
 # Run (Spring Boot auto-starts Kafka + Schema Registry + Kafka UI via Docker Compose)
@@ -135,7 +167,9 @@ Week 3: Advanced & Production
 
 ```
 kafkaproducer/
-├── compose.yaml                    # Kafka + Schema Registry + Kafka UI
+├── compose.yaml                    # Infrastructure only (for local dev)
+├── docker-compose.standalone.yaml  # Complete stack (for Docker-only users)
+├── Dockerfile                      # Multi-stage build for the app
 ├── src/main/avro/                  # Avro schema definitions (.avsc)
 │   ├── OrderEvent.avsc
 │   └── UserEvent.avsc
@@ -166,13 +200,24 @@ kafkaproducer/
 
 ## Docker Services
 
-The project automatically starts three services via Docker Compose:
+### Standalone Mode (docker-compose.standalone.yaml)
+Complete learning environment - everything in Docker:
 
 | Service | Port | Purpose |
 |---------|------|---------|
-| **Kafka** | 9092 | Message broker (KRaft mode, no Zookeeper) |
-| **Schema Registry** | 8081 | Avro schema storage and validation |
-| **Kafka UI** | 8080 | Visual message and schema browser |
+| **kafka** | 9092 | Message broker (KRaft mode, no Zookeeper) |
+| **schema-registry** | 8081 | Avro schema storage and validation |
+| **kafka-ui** | 8080 | Visual message and schema browser |
+| **learning-agent** | - | Interactive CLI lessons (attaches to terminal) |
+
+### Development Mode (compose.yaml)
+Infrastructure only - run the app locally with Java:
+
+| Service | Port | Purpose |
+|---------|------|---------|
+| **kafka** | 9092 | Message broker (KRaft mode, no Zookeeper) |
+| **schema-registry** | 8081 | Avro schema storage and validation |
+| **kafka-ui** | 8080 | Visual message and schema browser |
 
 ## Key Configurations Explained
 
@@ -244,6 +289,7 @@ LESSON 11: Avro & Schema Registry - Production Serialization
 
 ## Commands Reference
 
+### Running Locally (with Java)
 ```bash
 # Run the application (starts Kafka + Schema Registry automatically)
 ./mvnw spring-boot:run
@@ -253,15 +299,47 @@ LESSON 11: Avro & Schema Registry - Production Serialization
 
 # Build JAR
 ./mvnw clean package
+```
 
-# Run specific lesson via args (optional)
-./mvnw spring-boot:run -Dspring-boot.run.arguments="--lesson=11"
+### Running with Docker (no Java required)
+```bash
+# Start the complete learning environment
+docker compose -f docker-compose.standalone.yaml up
 
+# Run in background, then attach
+docker compose -f docker-compose.standalone.yaml up -d
+docker attach kafka-learning-agent
+
+# Stop everything
+docker compose -f docker-compose.standalone.yaml down
+
+# Stop and remove volumes (clean slate)
+docker compose -f docker-compose.standalone.yaml down -v
+```
+
+### Building the Docker Image (for maintainers)
+```bash
+# Build locally
+docker build -t kafka-producer-learning-agent:latest .
+
+# Build and run locally
+docker compose -f docker-compose.standalone.yaml up --build
+
+# Tag and push to registry
+docker tag kafka-producer-learning-agent:latest ghcr.io/elzakaria/kafka-producer-learning-agent:latest
+docker push ghcr.io/elzakaria/kafka-producer-learning-agent:latest
+```
+
+### Schema Registry Commands
+```bash
 # View registered schemas
 curl http://localhost:8081/subjects
 
 # View schema versions
 curl http://localhost:8081/subjects/lesson11-avro-orders-value/versions
+
+# Get specific schema
+curl http://localhost:8081/subjects/lesson11-avro-orders-value/versions/1
 ```
 
 ## Troubleshooting
@@ -303,11 +381,13 @@ Schema Registry takes a few seconds to start. If Lesson 11 fails:
 Contributions are welcome! Ideas for improvement:
 
 - [x] ~~Add Schema Registry + Avro lesson~~ (Done! Lesson 11)
+- [x] ~~Docker image for easy distribution~~ (Done! docker-compose.standalone.yaml)
 - [ ] Add consumer lessons (companion project?)
 - [ ] Add Kotlin version
 - [ ] Add integration tests for lessons
 - [ ] Add Spring Cloud Stream comparison
 - [ ] Add Protobuf serialization lesson
+- [ ] GitHub Actions for auto-building Docker image
 
 ## License
 
