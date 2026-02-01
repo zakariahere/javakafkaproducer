@@ -94,9 +94,10 @@ public class Lesson01Basics implements Lesson {
                 kafkaTemplate.send(TOPIC, "sync-key", "Hello, Kafka! (synchronous)");
 
         // Block and wait for the result
-        SendResult<String, String> result = future.get();
+        SendResult<String, String> result = future.get();  // <----- WILL throw here if exception if ever.
         RecordMetadata metadata = result.getRecordMetadata();
 
+        // WHEN ACKS is at its lowest you will have a hollow RecordMetadata object
         success("Message confirmed by broker!");
         result("Topic: " + metadata.topic());
         result("Partition: " + metadata.partition());
