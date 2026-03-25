@@ -1,5 +1,6 @@
 package com.elzakaria.kafkaconsumer.lessons;
 
+import com.elzakaria.kafkacommon.Lesson;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -14,9 +15,9 @@ import java.util.Scanner;
 @Service("consumerLessonRunner")
 public class ConsumerLessonRunner {
 
-    private final List<Lesson> lessons;
+    private final List<ConsumerLesson> lessons;
 
-    public ConsumerLessonRunner(List<Lesson> lessons) {
+    public ConsumerLessonRunner(List<ConsumerLesson> lessons) {
         this.lessons = lessons.stream()
                 .sorted(Comparator.comparingInt(Lesson::getLessonNumber))
                 .toList();

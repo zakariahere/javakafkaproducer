@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson08_batching;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -24,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
  * 4. Performance tradeoffs
  */
 @Component
-public class Lesson08Batching implements Lesson {
+public class Lesson08Batching implements ProducerLesson {
 
     private static final String TOPIC = "lesson08-batching";
     private static final int MESSAGE_COUNT = 1000;

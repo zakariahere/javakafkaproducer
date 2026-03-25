@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson11_avro;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.avro.Schema;
@@ -29,7 +29,7 @@ import java.util.concurrent.Future;
  * 4. Schema compatibility rules
  */
 @Component
-public class Lesson11Avro implements Lesson {
+public class Lesson11Avro implements ProducerLesson {
 
     private static final String TOPIC = "lesson11-avro";
     private static final String SCHEMA_REGISTRY_URL = "http://localhost:8081";

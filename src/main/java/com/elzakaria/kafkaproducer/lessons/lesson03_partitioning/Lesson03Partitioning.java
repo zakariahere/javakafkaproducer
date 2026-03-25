@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson03_partitioning;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -24,7 +24,7 @@ import java.util.Map;
  * 3. Custom partitioner (business logic routing)
  */
 @Component
-public class Lesson03Partitioning implements Lesson {
+public class Lesson03Partitioning implements ProducerLesson {
 
     private static final String TOPIC = "lesson03-partitioning";
     private static final int NUM_PARTITIONS = 4;

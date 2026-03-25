@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson04_callbacks;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 4. Batch completion tracking
  */
 @Component
-public class Lesson04Callbacks implements Lesson {
+public class Lesson04Callbacks implements ProducerLesson {
 
     private static final String TOPIC = "lesson04-callbacks";
 

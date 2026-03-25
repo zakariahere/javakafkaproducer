@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson05_error_handling;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.errors.RecordTooLargeException;
 import org.apache.kafka.common.errors.SerializationException;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Lesson 05: Error Handling and Retries
@@ -26,7 +24,7 @@ import java.util.concurrent.ExecutionException;
  * 4. Dead letter topic pattern
  */
 @Component
-public class Lesson05ErrorHandling implements Lesson {
+public class Lesson05ErrorHandling implements ProducerLesson {
 
     private static final String TOPIC = "lesson05-errors";
     private static final String DLT_TOPIC = "lesson05-errors-dlt";

@@ -1,7 +1,7 @@
 package com.elzakaria.kafkaconsumer.lessons.lesson03_offsets;
 
 import com.elzakaria.kafkaconsumer.ConsumerUtils;
-import com.elzakaria.kafkaconsumer.lessons.Lesson;
+import com.elzakaria.kafkaconsumer.lessons.ConsumerLesson;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -20,7 +20,7 @@ import java.util.Map;
  * Understand offset tracking, commits, and exactly-once semantics.
  */
 @Component
-public class Lesson03OffsetManagement implements Lesson {
+public class Lesson03OffsetManagement implements ConsumerLesson {
 
     private static final String TOPIC = "lesson03-offsets";
     private static final String GROUP_ID = "lesson03-group";

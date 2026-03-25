@@ -91,11 +91,11 @@ You'll see an interactive menu to choose your learning path:
 │      Topics: Basics, Partitioning, Serialization,      │
 │              Callbacks, Transactions, Batching, Avro    │
 │                                                         │
-│  [2] 📥 KAFKA CONSUMER LESSONS (12 Lessons)            │
+│  [2] 📥 KAFKA CONSUMER LESSONS (14 Lessons)            │
 │      Master consuming messages reliably                 │
-│      Topics: Polling, Groups, Offsets,                 │
-│              Deserialization, Error Handling, State     │
-│              Management, Concurrency, Production        │
+│      Topics: Basics, Deserialization, Offsets,         │
+│              Groups, Error Handling, Filters,           │
+│              State Management, Concurrency, Production  │
 │                                                         │
 │  [q] Quit the application                              │
 │                                                         │
@@ -147,66 +147,68 @@ Choose **Option 1** for Producer lessons or **Option 2** for Consumer lessons. Y
 
 ---
 
-### Consumer Lessons (12 Lessons)
+### Consumer Lessons (14 Lessons - Ordered by Complexity)
 
-#### Module 1: Fundamentals
-
-| Lesson | Topic | What You'll Learn |
-|--------|-------|-------------------|
-| **01** | Basics | Polling model, consumer groups, partition assignment, offsets |
-| **02** | Groups & Rebalancing | Partition strategies, rebalancing triggers, session timeouts |
-| **03** | Offset Management | Commit strategies, lag tracking, seeking (CRITICAL!) |
-
-#### Module 2: Reliability
+#### Module 1: Foundations
 
 | Lesson | Topic | What You'll Learn |
 |--------|-------|-------------------|
-| **04** | Deserialization | Type safety, error handling, Dead Letter Topics |
+| **01** | Consumer Basics | Polling model, consumer groups, partition assignment, offsets |
+| **02** | Deserialization | Type safety, custom deserializers, error handling |
+| **03** | Offset Management | Commit strategies, lag tracking, seeking to positions (CRITICAL!) |
+| **04** | Consumer Groups & Rebalancing | Partition strategies, rebalancing triggers, session timeouts |
+
+#### Module 2: Core Patterns
+
+| Lesson | Topic | What You'll Learn |
+|--------|-------|-------------------|
 | **05** | Error Handling | Error classification, retries, circuit breaker patterns |
-| **06** | State Management | Idempotent processing, exactly-once semantics, checkpoints |
+| **06** | Consumer Filters & Configuration | earliest/latest offset reset, filtering by partition/offset |
+| **07** | State & Offset Management | Idempotent processing, exactly-once semantics, checkpoints |
 
-#### Module 3: Implementation
-
-| Lesson | Topic | What You'll Learn |
-|--------|-------|-------------------|
-| **07** | Concurrency | Thread safety, async processing, graceful shutdown |
-| **08** | Performance | Fetch tuning, latency vs throughput, memory management |
-| **09** | Advanced Patterns | Multi-topic consumption, fan-out, aggregations |
-
-#### Module 4: Production
+#### Module 3: Intermediate Implementation
 
 | Lesson | Topic | What You'll Learn |
 |--------|-------|-------------------|
-| **10** | Production Readiness | Health checks, monitoring, scaling strategies (ESSENTIAL!) |
-| **11** | Transactions | Isolation levels, exactly-once semantics, idempotent writes |
-| **12** | Integration & Testing | Database integration, API enrichment, event sourcing, testing |
+| **08** | Concurrency & Threading | Thread safety, async processing, graceful shutdown |
+| **09** | Transactions & Exactly-Once | Isolation levels, transactional reads, idempotent writes |
+| **10** | Performance Tuning | Fetch tuning, latency vs throughput, memory management |
+
+#### Module 4: Advanced & Production
+
+| Lesson | Topic | What You'll Learn |
+|--------|-------|-------------------|
+| **11** | Advanced Patterns | Multi-topic consumption, fan-out patterns, stream aggregations |
+| **12** | Spring @KafkaListener | Declarative listeners, containers, lifecycle management |
+| **13** | Production Readiness | Health checks, monitoring, scaling strategies, operational concerns |
+| **14** | Real-World Scenarios | Database integration, API enrichment, event sourcing, testing patterns |
 
 ## Recommended Learning Path
 
-### Complete Learning (4 Weeks - 23 Lessons)
+### Complete Learning (4 Weeks - 25 Lessons)
 
 ```
 Week 1: Producer Foundations
-├── Day 1-2: Lesson 01 (Basics) - Understand the three send patterns
-├── Day 3-4: Lesson 02 (Serialization) - Master JSON serialization
-└── Day 5:   Lesson 03 (Partitioning) - Learn key-based routing
+├── Day 1-2: Producer Lesson 01 (Basics) - Understand the three send patterns
+├── Day 3-4: Producer Lesson 02 (Serialization) - Master JSON serialization
+└── Day 5:   Producer Lesson 03 (Partitioning) - Learn key-based routing
 
 Week 2: Producer Reliability & Consumer Foundations
 ├── Day 1-2: Producer Lesson 04 (Callbacks) - Handle async results
 ├── Day 3:   Producer Lesson 05 (Error Handling) - Build resilience
-├── Day 4-5: Consumer Lesson 01-02 (Basics & Groups) - Understand consumption
+├── Day 4-5: Consumer Lesson 01-02 (Basics & Deserialization) - Understand consumption
 
 Week 3: Consumer Core Topics (CRITICAL!)
 ├── Day 1-2: Consumer Lesson 03 (Offsets) ⭐ Most important!
-├── Day 3-4: Consumer Lesson 05 (Error Handling)
-└── Day 5:   Consumer Lesson 10 (Production) ⭐ Operations focus
+├── Day 3:   Consumer Lesson 04 (Groups & Rebalancing)
+└── Day 5:   Consumer Lesson 05-06 (Error Handling & Filters)
 
 Week 4: Advanced Topics & Production
 ├── Day 1:   Producer Lesson 06 (Transactions)
-├── Day 2:   Consumer Lesson 11 (Transactions)
-├── Day 3-4: Consumer Lesson 06-07 (State & Concurrency)
-├── Day 5:   Consumer Lesson 12 (Integration & Testing)
-└── Bonus:   Producer Lesson 11 (Avro & Schema Registry)
+├── Day 2:   Consumer Lesson 09 (Transactions)
+├── Day 3-4: Consumer Lesson 07-08 (State & Concurrency)
+├── Day 5:   Consumer Lesson 13 (Production Readiness) ⭐ Operations focus
+└── Bonus:   Consumer Lesson 14 (Integration & Testing), Producer Lesson 11 (Avro)
 ```
 
 ### Express Learning (1 Week - 8 Lessons - Producer Only)
@@ -220,19 +222,26 @@ Day 5:   Producer Lesson 05 (Error Handling)
 Day 6-7: Producer Lesson 06 + 10 (Transactions + Performance)
 ```
 
-### Consumer-Focused Learning (2 Weeks - 12 Lessons - Consumer Only)
+### Consumer-Focused Learning (3 Weeks - 14 Lessons)
 
 ```
-Week 1:
-├── Day 1-2: Lesson 01 (Basics)
-├── Day 3-4: Lesson 02 (Groups & Rebalancing)
-└── Day 5:   Lesson 03 (Offsets) ⭐ CRITICAL
+Week 1: Foundations
+├── Day 1-2: Consumer Lesson 01 (Basics)
+├── Day 3:   Consumer Lesson 02 (Deserialization)
+└── Day 4-5: Consumer Lesson 03 (Offsets) ⭐ CRITICAL
 
-Week 2:
-├── Day 1:   Lesson 05 (Error Handling)
-├── Day 2-3: Lesson 06 + 10 (State & Production)
-├── Day 4:   Lesson 07 (Concurrency)
-└── Day 5:   Lesson 12 (Integration)
+Week 2: Core Patterns
+├── Day 1:   Consumer Lesson 04 (Groups & Rebalancing)
+├── Day 2:   Consumer Lesson 05 (Error Handling)
+├── Day 3:   Consumer Lesson 06 (Filters & Configuration)
+└── Day 4-5: Consumer Lesson 07 (State Management)
+
+Week 3: Advanced & Production
+├── Day 1:   Consumer Lesson 08 (Concurrency)
+├── Day 2:   Consumer Lesson 09 (Transactions)
+├── Day 3:   Consumer Lesson 10 (Performance)
+├── Day 4:   Consumer Lesson 13 (Production Readiness) ⭐ Operations
+└── Day 5:   Consumer Lesson 14 (Integration & Real-World)
 ```
 
 ## Project Structure
@@ -269,27 +278,27 @@ kafkaproducer/
 │   │       ├── lesson10_performance/
 │   │       └── lesson11_avro/        # Avro + Schema Registry
 │   │
-│   └── kafkaconsumer/                # 🆕 NEW: Consumer Lessons
+│   └── kafkaconsumer/                # 🆕 NEW: Consumer Lessons (14, ordered by complexity)
 │       ├── KafkaconsumerApplication.java
 │       ├── config/
 │       │   └── KafkaConsumerConfig.java
 │       └── lessons/
 │           ├── Lesson.java           # Base interface
 │           ├── LessonRunner.java     # Interactive CLI
-│           ├── lesson01_basics/      # Polling model
-│           ├── lesson02_groups/      # Rebalancing
-│           ├── lesson03_offsets/     # Commit strategies
-│           ├── lesson04_deserialization/
-│           ├── lesson05_error_handling/
-│           ├── lesson06_state_management/
-│           ├── lesson07_concurrency/
-│           ├── lesson08_performance/
-│           ├── lesson09_advanced_patterns/
-│           ├── lesson10_production/
-│           ├── lesson11_transactions/
-│           ├── lesson12_integration/
-│           ├── lesson13_filters_and_offsets/
-│           └── lesson14_kafka_listener/
+│           ├── lesson01_basics/      # Polling model, groups, offsets
+│           ├── lesson02_deserialization/  # Type safety, deserializers
+│           ├── lesson03_offsets/     # Commit strategies (CRITICAL!)
+│           ├── lesson04_groups/      # Rebalancing, partitioning
+│           ├── lesson05_error_handling/   # Retries, circuit breakers
+│           ├── lesson06_filters/     # earliest/latest reset, filtering
+│           ├── lesson07_state_management/ # Idempotency, exactly-once
+│           ├── lesson08_concurrency/     # Threading, async processing
+│           ├── lesson09_transactions/    # Exactly-once semantics
+│           ├── lesson10_performance/     # Fetch tuning, memory mgmt
+│           ├── lesson11_advanced_patterns/ # Multi-topic, aggregations
+│           ├── lesson12_kafka_listener/  # @KafkaListener containers
+│           ├── lesson13_production/      # Monitoring, scaling (ESSENTIAL!)
+│           └── lesson14_integration/     # DB integration, testing
 └── src/main/resources/
     └── application.properties
 ```

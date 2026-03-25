@@ -1,7 +1,7 @@
 package com.elzakaria.kafkaconsumer.lessons.lesson01_basics;
 
 import com.elzakaria.kafkaconsumer.ConsumerUtils;
-import com.elzakaria.kafkaconsumer.lessons.Lesson;
+import com.elzakaria.kafkaconsumer.lessons.ConsumerLesson;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -31,7 +31,7 @@ import java.util.concurrent.CompletableFuture;
  * 5. Message lifecycle
  */
 @Component
-public class Lesson01ConsumerBasics implements Lesson {
+public class Lesson01ConsumerBasics implements ConsumerLesson {
 
     private static final String TOPIC = "lesson01-consumer-basics";
     private static final String GROUP_ID = "lesson01-group";

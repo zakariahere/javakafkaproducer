@@ -1,4 +1,4 @@
-package com.elzakaria.kafkaconsumer.lessons;
+package com.elzakaria.kafkacommon;
 
 /**
  * Base interface for all Kafka Consumer lessons.

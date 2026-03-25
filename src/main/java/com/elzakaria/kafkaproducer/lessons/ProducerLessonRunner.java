@@ -1,5 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons;
 
+import com.elzakaria.kafkacommon.Lesson;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -15,11 +16,11 @@ import java.util.Scanner;
 @Service("producerLessonRunner")
 public class ProducerLessonRunner {
 
-    private final List<Lesson> lessons;
+    private final List<ProducerLesson> lessons;
 
-    public ProducerLessonRunner(List<Lesson> lessons) {
+    public ProducerLessonRunner(List<ProducerLesson> lessons) {
         this.lessons = lessons.stream()
-                .sorted(Comparator.comparingInt(Lesson::getLessonNumber))
+                .sorted(Comparator.comparingInt(ProducerLesson::getLessonNumber))
                 .toList();
     }
 

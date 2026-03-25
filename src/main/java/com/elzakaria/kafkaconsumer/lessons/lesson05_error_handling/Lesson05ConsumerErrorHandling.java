@@ -1,7 +1,7 @@
 package com.elzakaria.kafkaconsumer.lessons.lesson05_error_handling;
 
 import com.elzakaria.kafkaconsumer.ConsumerUtils;
-import com.elzakaria.kafkaconsumer.lessons.Lesson;
+import com.elzakaria.kafkaconsumer.lessons.ConsumerLesson;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Build robust error handling and recovery patterns.
  */
 @Component
-public class Lesson05ConsumerErrorHandling implements Lesson {
+public class Lesson05ConsumerErrorHandling implements ConsumerLesson {
 
     private static final String TOPIC = "lesson05-errors";
     private static final String DLT_TOPIC = "lesson05-errors-dlt";

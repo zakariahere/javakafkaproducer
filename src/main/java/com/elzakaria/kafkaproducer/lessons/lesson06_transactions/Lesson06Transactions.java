@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson06_transactions;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -21,7 +21,7 @@ import java.util.UUID;
  * 4. Read committed isolation
  */
 @Component
-public class Lesson06Transactions implements Lesson {
+public class Lesson06Transactions implements ProducerLesson {
 
     private static final String TOPIC_ORDERS = "lesson06-orders";
     private static final String TOPIC_INVENTORY = "lesson06-inventory";
