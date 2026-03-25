@@ -1,28 +1,28 @@
 package com.elzakaria.kafkaproducer.lessons;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+
 /**
  * Interactive CLI to select and run Kafka Producer lessons.
  * Automatically discovers all Lesson implementations via Spring DI.
+ * Note: Controlled by ApplicationLauncher, not auto-run.
  */
-@Component
-public class LessonRunner implements CommandLineRunner {
+@Service("producerLessonRunner")
+public class ProducerLessonRunner {
 
     private final List<Lesson> lessons;
 
-    public LessonRunner(List<Lesson> lessons) {
+    public ProducerLessonRunner(List<Lesson> lessons) {
         this.lessons = lessons.stream()
                 .sorted(Comparator.comparingInt(Lesson::getLessonNumber))
                 .toList();
     }
 
-    @Override
     public void run(String... args) throws Exception {
         printWelcome();
 

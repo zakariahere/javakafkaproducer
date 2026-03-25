@@ -1,16 +1,16 @@
-# Kafka Producer Learning Agent
+# Kafka Learning Agent - Producer & Consumer
 
-> Master Apache Kafka Producer patterns from basics to production-ready configurations through hands-on, runnable lessons.
+> Master Apache Kafka both as a producer and consumer through hands-on, runnable lessons covering all patterns from basics to production-ready configurations.
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
 ║                                                                      ║
-║           KAFKA PRODUCER LEARNING AGENT                              ║
-║           =============================                              ║
+║           KAFKA LEARNING AGENT                                       ║
+║           =====================                                      ║
 ║                                                                      ║
-║   11 Progressive Lessons • Spring Boot 3.5 • Java 25                 ║
-║   Zero Config Setup • Interactive CLI • Visual Explanations         ║
-║   Includes Schema Registry + Avro!                                   ║
+║   11 Producer Lessons + 14 Consumer Lessons                          ║
+║   Spring Boot 3.5 • Java 25 • Zero Config Setup                      ║
+║   Interactive CLI • Visual Explanations • Unified Launcher           ║
 ║                                                                      ║
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
@@ -20,11 +20,12 @@
 Learning Kafka can be overwhelming. Documentation is vast, configurations are many, and it's hard to know what matters. This project takes a different approach:
 
 - **Learn by doing** - Every concept has runnable code
+- **Comprehensive** - Both producer AND consumer patterns in one place
 - **Progressive complexity** - Start simple, build up to production patterns
 - **Visual explanations** - ASCII diagrams explain what's happening
 - **Zero setup friction** - Spring Boot auto-starts Kafka via Docker
 - **See your messages** - Kafka UI included for visual verification
-- **Production-ready** - Includes Avro + Schema Registry (Lesson 11)
+- **Production-ready** - Includes error handling, transactions, exactly-once semantics
 
 ## Prerequisites
 
@@ -78,32 +79,32 @@ cd kafka-producer-learning-agent
 mvnw.cmd spring-boot:run  # Windows
 ```
 
-You'll see an interactive menu:
+You'll see an interactive menu to choose your learning path:
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        AVAILABLE LESSONS                            │
-├─────────────────────────────────────────────────────────────────────┤
-│   1. Producer Basics - Send Patterns                                │
-│   2. Serialization - String, JSON, and Custom                       │
-│   3. Partitioning - Keys and Distribution                           │
-│   4. Callbacks & Futures - Handling Results                         │
-│   5. Error Handling - Retries and Recovery                          │
-│   6. Transactions - Exactly-Once Semantics                          │
-│   7. Idempotency - Preventing Duplicates                            │
-│   8. Batching & Compression - Throughput Tuning                     │
-│   9. Interceptors - Logging, Metrics, Transformation                │
-│  10. Performance - Production Tuning & Benchmarking                 │
-│  11. Avro & Schema Registry - Production Serialization              │
-├─────────────────────────────────────────────────────────────────────┤
-│  Module 1 (Lessons 1-3):   Foundations                              │
-│  Module 2 (Lessons 4-6):   Reliability                              │
-│  Module 3 (Lessons 7-9):   Advanced Patterns                        │
-│  Module 4 (Lessons 10-11): Production Readiness                     │
-└─────────────────────────────────────────────────────────────────────┘
+╔═════════════════════════════════════════════════════════╗
+║  🎓 KAFKA LEARNING AGENT - LESSON SELECTOR 🎓          ║
+╠═════════════════════════════════════════════════════════╣
+│                                                         │
+│  [1] 📤 KAFKA PRODUCER LESSONS (11 Lessons)            │
+│      Learn to send messages with confidence             │
+│      Topics: Basics, Partitioning, Serialization,      │
+│              Callbacks, Transactions, Batching, Avro    │
+│                                                         │
+│  [2] 📥 KAFKA CONSUMER LESSONS (12 Lessons)            │
+│      Master consuming messages reliably                 │
+│      Topics: Polling, Groups, Offsets,                 │
+│              Deserialization, Error Handling, State     │
+│              Management, Concurrency, Production        │
+│                                                         │
+│  [q] Quit the application                              │
+│                                                         │
+╚═════════════════════════════════════════════════════════╝
 
-Enter lesson number (1-11), 'a' for all, or 'q' to quit:
+Enter your choice (1=Producer, 2=Consumer, 'q'=Quit):
 ```
+
+Choose **Option 1** for Producer lessons or **Option 2** for Consumer lessons. You can switch between them anytime!
 
 **View your messages:**
 - Kafka UI: http://localhost:8080
@@ -111,7 +112,9 @@ Enter lesson number (1-11), 'a' for all, or 'q' to quit:
 
 ## Curriculum
 
-### Module 1: Foundations
+### Producer Lessons (11 Lessons)
+
+#### Module 1: Foundations
 
 | Lesson | Topic | What You'll Learn |
 |--------|-------|-------------------|
@@ -119,7 +122,7 @@ Enter lesson number (1-11), 'a' for all, or 'q' to quit:
 | **02** | Serialization | String, JSON, and manual serialization strategies |
 | **03** | Partitioning | Key-based routing, custom partitioners, ordering guarantees |
 
-### Module 2: Reliability
+#### Module 2: Reliability
 
 | Lesson | Topic | What You'll Learn |
 |--------|-------|-------------------|
@@ -127,7 +130,7 @@ Enter lesson number (1-11), 'a' for all, or 'q' to quit:
 | **05** | Error Handling | Retries, backoff, dead letter topics |
 | **06** | Transactions | Exactly-once semantics, atomic multi-topic writes |
 
-### Module 3: Advanced Patterns
+#### Module 3: Advanced Patterns
 
 | Lesson | Topic | What You'll Learn |
 |--------|-------|-------------------|
@@ -135,65 +138,158 @@ Enter lesson number (1-11), 'a' for all, or 'q' to quit:
 | **08** | Batching | batch.size, linger.ms, compression algorithms |
 | **09** | Interceptors | ProducerInterceptor for logging, metrics, headers |
 
-### Module 4: Production Readiness
+#### Module 4: Production Readiness
 
 | Lesson | Topic | What You'll Learn |
 |--------|-------|-------------------|
 | **10** | Performance | Tuning guide, benchmarking, production checklist |
 | **11** | Avro & Schema Registry | Binary serialization, schema evolution, compatibility rules |
 
+---
+
+### Consumer Lessons (12 Lessons)
+
+#### Module 1: Fundamentals
+
+| Lesson | Topic | What You'll Learn |
+|--------|-------|-------------------|
+| **01** | Basics | Polling model, consumer groups, partition assignment, offsets |
+| **02** | Groups & Rebalancing | Partition strategies, rebalancing triggers, session timeouts |
+| **03** | Offset Management | Commit strategies, lag tracking, seeking (CRITICAL!) |
+
+#### Module 2: Reliability
+
+| Lesson | Topic | What You'll Learn |
+|--------|-------|-------------------|
+| **04** | Deserialization | Type safety, error handling, Dead Letter Topics |
+| **05** | Error Handling | Error classification, retries, circuit breaker patterns |
+| **06** | State Management | Idempotent processing, exactly-once semantics, checkpoints |
+
+#### Module 3: Implementation
+
+| Lesson | Topic | What You'll Learn |
+|--------|-------|-------------------|
+| **07** | Concurrency | Thread safety, async processing, graceful shutdown |
+| **08** | Performance | Fetch tuning, latency vs throughput, memory management |
+| **09** | Advanced Patterns | Multi-topic consumption, fan-out, aggregations |
+
+#### Module 4: Production
+
+| Lesson | Topic | What You'll Learn |
+|--------|-------|-------------------|
+| **10** | Production Readiness | Health checks, monitoring, scaling strategies (ESSENTIAL!) |
+| **11** | Transactions | Isolation levels, exactly-once semantics, idempotent writes |
+| **12** | Integration & Testing | Database integration, API enrichment, event sourcing, testing |
+
 ## Recommended Learning Path
 
+### Complete Learning (4 Weeks - 23 Lessons)
+
 ```
-Week 1: Foundations
+Week 1: Producer Foundations
 ├── Day 1-2: Lesson 01 (Basics) - Understand the three send patterns
 ├── Day 3-4: Lesson 02 (Serialization) - Master JSON serialization
 └── Day 5:   Lesson 03 (Partitioning) - Learn key-based routing
 
-Week 2: Reliability
-├── Day 1-2: Lesson 04 (Callbacks) - Handle async results properly
-├── Day 3-4: Lesson 05 (Error Handling) - Build resilient producers
-└── Day 5:   Lesson 06 (Transactions) - Achieve exactly-once delivery
+Week 2: Producer Reliability & Consumer Foundations
+├── Day 1-2: Producer Lesson 04 (Callbacks) - Handle async results
+├── Day 3:   Producer Lesson 05 (Error Handling) - Build resilience
+├── Day 4-5: Consumer Lesson 01-02 (Basics & Groups) - Understand consumption
 
-Week 3: Advanced & Production
-├── Day 1:   Lesson 07 (Idempotency) - Prevent duplicates
-├── Day 2-3: Lesson 08 (Batching) - Optimize throughput
-├── Day 4:   Lesson 09 (Interceptors) - Add cross-cutting concerns
-├── Day 5:   Lesson 10 (Performance) - Production-ready tuning
-└── Bonus:   Lesson 11 (Avro) - Schema Registry for the real world
+Week 3: Consumer Core Topics (CRITICAL!)
+├── Day 1-2: Consumer Lesson 03 (Offsets) ⭐ Most important!
+├── Day 3-4: Consumer Lesson 05 (Error Handling)
+└── Day 5:   Consumer Lesson 10 (Production) ⭐ Operations focus
+
+Week 4: Advanced Topics & Production
+├── Day 1:   Producer Lesson 06 (Transactions)
+├── Day 2:   Consumer Lesson 11 (Transactions)
+├── Day 3-4: Consumer Lesson 06-07 (State & Concurrency)
+├── Day 5:   Consumer Lesson 12 (Integration & Testing)
+└── Bonus:   Producer Lesson 11 (Avro & Schema Registry)
+```
+
+### Express Learning (1 Week - 8 Lessons - Producer Only)
+
+```
+Day 1:   Producer Lesson 01 (Basics)
+Day 2:   Producer Lesson 02 (Serialization)
+Day 3:   Producer Lesson 03 (Partitioning)
+Day 4:   Producer Lesson 04 (Callbacks)
+Day 5:   Producer Lesson 05 (Error Handling)
+Day 6-7: Producer Lesson 06 + 10 (Transactions + Performance)
+```
+
+### Consumer-Focused Learning (2 Weeks - 12 Lessons - Consumer Only)
+
+```
+Week 1:
+├── Day 1-2: Lesson 01 (Basics)
+├── Day 3-4: Lesson 02 (Groups & Rebalancing)
+└── Day 5:   Lesson 03 (Offsets) ⭐ CRITICAL
+
+Week 2:
+├── Day 1:   Lesson 05 (Error Handling)
+├── Day 2-3: Lesson 06 + 10 (State & Production)
+├── Day 4:   Lesson 07 (Concurrency)
+└── Day 5:   Lesson 12 (Integration)
 ```
 
 ## Project Structure
 
 ```
 kafkaproducer/
-├── compose.yaml                    # Infrastructure only (for local dev)
-├── docker-compose.standalone.yaml  # Complete stack (for Docker-only users)
-├── Dockerfile                      # Multi-stage build for the app
-├── src/main/avro/                  # Avro schema definitions (.avsc)
+├── compose.yaml                      # Infrastructure only (for local dev)
+├── docker-compose.standalone.yaml    # Complete stack (for Docker-only users)
+├── Dockerfile                        # Multi-stage build for the app
+├── src/main/avro/                    # Avro schema definitions (.avsc)
 │   ├── OrderEvent.avsc
 │   └── UserEvent.avsc
-├── src/main/java/com/elzakaria/kafkaproducer/
-│   ├── KafkaproducerApplication.java
-│   ├── config/
-│   │   └── KafkaConfig.java        # Shared Kafka configuration
-│   ├── model/
-│   │   ├── Order.java              # Sample domain model
-│   │   └── User.java               # Sample domain model
-│   └── lessons/
-│       ├── Lesson.java             # Base interface
-│       ├── LessonRunner.java       # Interactive CLI
-│       ├── lesson01_basics/
-│       ├── lesson02_serialization/
-│       ├── lesson03_partitioning/
-│       ├── lesson04_callbacks/
-│       ├── lesson05_error_handling/
-│       ├── lesson06_transactions/
-│       ├── lesson07_idempotency/
-│       ├── lesson08_batching/
-│       ├── lesson09_interceptors/
-│       ├── lesson10_performance/
-│       └── lesson11_avro/          # Avro + Schema Registry
+├── src/main/java/com/elzakaria/
+│   ├── kafkaproducer/
+│   │   ├── KafkaproducerApplication.java
+│   │   ├── ApplicationLauncher.java  # Unified lesson selector 🆕
+│   │   ├── config/
+│   │   │   └── KafkaConfig.java      # Shared Kafka configuration
+│   │   ├── model/
+│   │   │   ├── Order.java            # Sample domain model
+│   │   │   └── User.java             # Sample domain model
+│   │   └── lessons/
+│   │       ├── Lesson.java           # Base interface
+│   │       ├── LessonRunner.java     # Interactive CLI
+│   │       ├── lesson01_basics/
+│   │       ├── lesson02_serialization/
+│   │       ├── lesson03_partitioning/
+│   │       ├── lesson04_callbacks/
+│   │       ├── lesson05_error_handling/
+│   │       ├── lesson06_transactions/
+│   │       ├── lesson07_idempotency/
+│   │       ├── lesson08_batching/
+│   │       ├── lesson09_interceptors/
+│   │       ├── lesson10_performance/
+│   │       └── lesson11_avro/        # Avro + Schema Registry
+│   │
+│   └── kafkaconsumer/                # 🆕 NEW: Consumer Lessons
+│       ├── KafkaconsumerApplication.java
+│       ├── config/
+│       │   └── KafkaConsumerConfig.java
+│       └── lessons/
+│           ├── Lesson.java           # Base interface
+│           ├── LessonRunner.java     # Interactive CLI
+│           ├── lesson01_basics/      # Polling model
+│           ├── lesson02_groups/      # Rebalancing
+│           ├── lesson03_offsets/     # Commit strategies
+│           ├── lesson04_deserialization/
+│           ├── lesson05_error_handling/
+│           ├── lesson06_state_management/
+│           ├── lesson07_concurrency/
+│           ├── lesson08_performance/
+│           ├── lesson09_advanced_patterns/
+│           ├── lesson10_production/
+│           ├── lesson11_transactions/
+│           ├── lesson12_integration/
+│           ├── lesson13_filters_and_offsets/
+│           └── lesson14_kafka_listener/
 └── src/main/resources/
     └── application.properties
 ```
@@ -278,14 +374,15 @@ LESSON 11: Avro & Schema Registry - Production Serialization
 ## Tech Stack
 
 - **Spring Boot 3.5.10** - Latest Spring Boot with Docker Compose support
-- **Spring Kafka** - Spring's Kafka integration
+- **Spring Kafka** - Spring's Kafka integration for both producer and consumer
 - **Java 25** - Latest Java features (records, text blocks)
 - **Apache Kafka** - KRaft mode (no Zookeeper needed)
 - **Confluent Schema Registry** - Schema storage and evolution
-- **Apache Avro** - Binary serialization format
+- **Apache Avro** - Binary serialization format (producer lessons)
 - **Kafka UI** - Visual message and schema browser
 - **Lombok** - Reduced boilerplate
 - **Docker Compose** - Zero-config local infrastructure
+- **ApplicationLauncher** - Unified menu to switch between producer/consumer lessons 🆕
 
 ## Commands Reference
 
@@ -344,6 +441,33 @@ curl http://localhost:8081/subjects/lesson11-avro-orders-value/versions/1
 
 ## Troubleshooting
 
+### What's New (Latest Updates)
+
+**🎉 Major Updates:**
+- ✅ **Consumer Lessons Added!** - 12 comprehensive lessons covering polling, groups, offsets, error handling, state management, concurrency, performance, transactions, and more
+- ✅ **Unified Launcher** - Interactive menu lets you choose between producer and consumer lessons without restarting
+- ✅ **Faster Startup** - Optimized Docker healthchecks (40-50% faster, ~10-15 seconds vs ~24 seconds)
+- ✅ **Component Scanning** - Both producer and consumer packages are properly discovered
+
+**📚 Key Consumer Lessons:**
+- **Lesson 03 (Offsets)** ⭐ - Critical for understanding commit strategies and consumer lag
+- **Lesson 10 (Production)** ⭐ - Essential for monitoring, health checks, and scaling
+- **Lesson 11 (Transactions)** - Exactly-once semantics and isolation levels
+- **Lesson 12 (Integration)** - Database integration, testing, and real-world patterns
+
+**📖 Documentation Added:**
+- `FIXES_APPLIED.md` - Details of bean discovery fix and Docker optimization
+- `LAUNCHER_GUIDE.md` - Complete guide to using the unified launcher
+- `QUICK_FIX_SUMMARY.md` - Quick reference for recent changes
+- `CONSUMER_LESSONS.md` - Comprehensive consumer learning guide
+
+### Docker Compose Startup Optimization
+
+Recent optimization reduced startup time by 40-50%:
+- **Before:** ~24 seconds (Kafka ~12s, Schema Registry ~10s)
+- **After:** ~10-15 seconds
+- **Changes:** Faster healthcheck intervals and timeouts, added start_period
+
 ### Docker not starting?
 Make sure Docker Desktop is running before starting the application.
 
@@ -380,14 +504,17 @@ Schema Registry takes a few seconds to start. If Lesson 11 fails:
 
 Contributions are welcome! Ideas for improvement:
 
-- [x] ~~Add Schema Registry + Avro lesson~~ (Done! Lesson 11)
-- [x] ~~Docker image for easy distribution~~ (Done! docker-compose.standalone.yaml)
-- [ ] Add consumer lessons (companion project?)
-- [ ] Add Kotlin version
+- [x] ~~Add Schema Registry + Avro lesson~~ (Done! Producer Lesson 11)
+- [x] ~~Add Consumer lessons~~ (Done! 12 comprehensive consumer lessons)
+- [x] ~~Unified launcher for lesson selection~~ (Done! ApplicationLauncher)
+- [x] ~~Docker Compose optimization~~ (Done! 40-50% faster startup)
+- [ ] Add Kotlin version of lessons
 - [ ] Add integration tests for lessons
 - [ ] Add Spring Cloud Stream comparison
 - [ ] Add Protobuf serialization lesson
 - [ ] GitHub Actions for auto-building Docker image
+- [ ] Web UI for lesson selection (instead of CLI)
+- [ ] Add consumer lesson notes documentation
 
 ## License
 

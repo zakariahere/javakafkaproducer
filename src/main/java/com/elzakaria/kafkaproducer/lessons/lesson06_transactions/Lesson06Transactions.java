@@ -2,11 +2,9 @@ package com.elzakaria.kafkaproducer.lessons.lesson06_transactions;
 
 import com.elzakaria.kafkaproducer.lessons.Lesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -116,6 +114,9 @@ public class Lesson06Transactions implements Lesson {
             │ enable.idempotence = true  (automatically enabled)           │
             │ acks = all                 (automatically set)               │
             │ max.in.flight.requests.per.connection = 5 (max for EOS)      │
+            |                                                              |
+            | Comsumer should have isolation.level=read_committed for EOS  |
+            |    so that uncommitted messages are not visible to consumers |
             └──────────────────────────────────────────────────────────────┘
             """);
     }
@@ -286,7 +287,7 @@ public class Lesson06Transactions implements Lesson {
                 return null;
             });
         } catch (Exception e) {
-            System.out.println("    [TXN] Transaction aborted: " + e.getCause().getMessage());
+            System.out.println("    [TXN] Transaction aborted: " + e.getMessage());
             success("Transaction rolled back - no messages visible to consumers");
         }
 
