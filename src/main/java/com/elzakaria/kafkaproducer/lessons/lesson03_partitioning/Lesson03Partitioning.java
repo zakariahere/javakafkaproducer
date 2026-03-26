@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson03_partitioning;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -11,7 +11,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Lesson 03: Partitioning Strategies
@@ -22,7 +24,7 @@ import java.util.*;
  * 3. Custom partitioner (business logic routing)
  */
 @Component
-public class Lesson03Partitioning implements Lesson {
+public class Lesson03Partitioning implements ProducerLesson {
 
     private static final String TOPIC = "lesson03-partitioning";
     private static final int NUM_PARTITIONS = 4;
@@ -124,6 +126,7 @@ public class Lesson03Partitioning implements Lesson {
                 System.out.println("    Partition " + p + ": " + count + " messages"));
 
         tip("Sticky partitioner batches null-key messages to same partition for efficiency.");
+        tip("However, this behavior isn’t absolute and interacts with batching settings such as batch.size and linger.ms.");
     }
 
     private void demonstrateKeyBasedPartitioning() throws Exception {

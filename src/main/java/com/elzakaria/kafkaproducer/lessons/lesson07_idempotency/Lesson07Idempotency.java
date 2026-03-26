@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson07_idempotency;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -22,7 +22,7 @@ import java.util.UUID;
  * 4. Configuration requirements
  */
 @Component
-public class Lesson07Idempotency implements Lesson {
+public class Lesson07Idempotency implements ProducerLesson {
 
     private static final String TOPIC = "lesson07-idempotent";
 

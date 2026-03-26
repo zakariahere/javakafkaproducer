@@ -1,15 +1,11 @@
 package com.elzakaria.kafkaproducer.lessons.lesson02_serialization;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import com.elzakaria.kafkaproducer.model.Order;
 import com.elzakaria.kafkaproducer.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -27,7 +23,7 @@ import java.util.UUID;
  * 3. Custom serialization (full control)
  */
 @Component
-public class Lesson02Serialization implements Lesson {
+public class Lesson02Serialization implements ProducerLesson {
 
     private static final String TOPIC = "lesson02-serialization";
 

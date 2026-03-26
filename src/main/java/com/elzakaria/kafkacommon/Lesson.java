@@ -1,7 +1,7 @@
-package com.elzakaria.kafkaproducer.lessons;
+package com.elzakaria.kafkacommon;
 
 /**
- * Base interface for all Kafka Producer lessons.
+ * Base interface for all Kafka Consumer lessons.
  * Each lesson demonstrates a specific concept or pattern.
  */
 public interface Lesson {
@@ -12,7 +12,7 @@ public interface Lesson {
     void run() throws Exception;
 
     /**
-     * Get the lesson number (1-10).
+     * Get the lesson number (1-12).
      */
     int getLessonNumber();
 
@@ -80,6 +80,13 @@ public interface Lesson {
     }
 
     /**
+     * Print an anti-pattern warning.
+     */
+    default void warning(String message) {
+        System.out.println("\n[WARNING] ⚠️  " + message);
+    }
+
+    /**
      * Wait for a specified duration with a message.
      */
     default void waitFor(int seconds, String reason) throws InterruptedException {
@@ -87,3 +94,4 @@ public interface Lesson {
         Thread.sleep(seconds * 1000L);
     }
 }
+

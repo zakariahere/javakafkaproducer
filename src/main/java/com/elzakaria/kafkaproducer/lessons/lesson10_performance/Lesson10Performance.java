@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson10_performance;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  * 4. Benchmarking methodology
  */
 @Component
-public class Lesson10Performance implements Lesson {
+public class Lesson10Performance implements ProducerLesson {
 
     private static final String TOPIC = "lesson10-performance";
     private static final int BENCHMARK_MESSAGES = 10000;

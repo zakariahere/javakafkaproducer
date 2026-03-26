@@ -1,7 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson01_basics;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
-import org.apache.kafka.clients.producer.ProducerRecord;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -18,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
  * 3. Asynchronous send with callbacks
  */
 @Component
-public class Lesson01Basics implements Lesson {
+public class Lesson01Basics implements ProducerLesson {
 
     private static final String TOPIC = "lesson01-basics";
 

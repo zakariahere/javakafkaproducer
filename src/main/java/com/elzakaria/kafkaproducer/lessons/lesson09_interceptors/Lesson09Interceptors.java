@@ -1,6 +1,6 @@
 package com.elzakaria.kafkaproducer.lessons.lesson09_interceptors;
 
-import com.elzakaria.kafkaproducer.lessons.Lesson;
+import com.elzakaria.kafkaproducer.lessons.ProducerLesson;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -20,7 +20,7 @@ import java.util.Map;
  * 4. Chaining interceptors
  */
 @Component
-public class Lesson09Interceptors implements Lesson {
+public class Lesson09Interceptors implements ProducerLesson {
 
     private static final String TOPIC = "lesson09-interceptors";
 
